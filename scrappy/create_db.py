@@ -21,7 +21,7 @@ sqlCreateDatabase = "create database " + name_Database + ";"
 
 # Create a table in PostgreSQL database
 
-#cursor.execute(sqlCreateDatabase);
+cursor.execute(sqlCreateDatabase);
 
 con.commit()
 con.close()
@@ -39,7 +39,7 @@ sqlCreateTable = "CREATE TABLE properties (" \
                  "address VARCHAR (255) NOT NULL," \
                  "img_url VARCHAR (255) NOT NULL" \
                  ");"
-#cursor.execute(sqlCreateTable)
+cursor.execute(sqlCreateTable)
 
 con.commit()
 con.close()

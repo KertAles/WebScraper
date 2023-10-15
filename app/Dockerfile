@@ -6,8 +6,11 @@ WORKDIR /app
 COPY requirementsApp.txt .
 RUN pip install --no-cache-dir -r requirementsApp.txt
 
-COPY . .
+# Copy the custom server script into the container
+COPY . /app
 
-CMD [ "python", "http_server.py" ]
-
+# Expose the port your server listens on
 EXPOSE 8080
+
+# Run your custom server script
+CMD ["python", "http_server.py"]

@@ -18,15 +18,11 @@ services:
     depends_on:
       - postgres
 
-  python-http-server:
-    build:
-      context: ./app
-    volumes:
-      - ./app:/app
+  app:
+    build: 
+        context: ./app
     ports:
-      - "8080:8000"
-    depends_on:
-      - scrapy
+      - "8080:8080"
 
 volumes:
   postgres_data:

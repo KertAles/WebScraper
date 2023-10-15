@@ -1,13 +1,14 @@
 import psycopg2
 # Python 3 server example
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import http
 import time
+import socketserver
 
-hostName = "localhost"
-serverPort = 8080
+port = 8080
 
-class MyServer(BaseHTTPRequestHandler):
-
+# Create a custom request handler to suppress log messages
+class GetHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         conn = psycopg2.connect(
             host="postgres",
@@ -46,16 +47,8 @@ class MyServer(BaseHTTPRequestHandler):
         cursor.close()
         conn.close()
 
-if __name__ == "__main__":
-    webServer = HTTPServer((hostName, serverPort), MyServer)
-    print("Server started http://%s:%s" % (hostName, serverPort))
-
-    try:
-        webServer.serve_forever()
-    except KeyboardInterrupt:
-        pass
-
-    webServer.server_close()
-    print("Server stopped.")
-
+# Create a socket server to serve HTTP requests
+with socketserver.TCPServer(("", port), GetHandler) as httpd:
+    print(f"Serving at port {port}")
+    httpd.serve_forever()
 
