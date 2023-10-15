@@ -1,0 +1,1 @@
+CREATE TABLE properties (address VARCHAR (255) NOT NULL, img_url VARCHAR (255) NOT NULL);

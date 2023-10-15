@@ -21,6 +21,4 @@ RUN rm -f geckodriver-v0.30.0-linux64.tar.gz
 # Copy the rest of the application code into the container
 COPY . /scrappy
 
-CMD [ "python", "create_db.py" ]
-
 CMD [ "scrapy", "crawl", "properties" ]

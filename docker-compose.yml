@@ -1,20 +1,14 @@
 version: '3'
 services:
   postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: test
+    build:
+        context: ./db
     ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+        - "5432:5432"
 
   scrapy:
     build:
       context: ./scrappy
-    volumes:
-      - ./scrappy:/app
     depends_on:
       - postgres
 
@@ -23,6 +17,5 @@ services:
         context: ./app
     ports:
       - "8080:8080"
-
-volumes:
-  postgres_data:
+    depends_on:
+      - postgres
