@@ -1,0 +1,4 @@
+psycopg2
+scrapy
+selenium==3.9.0
+scrapy-selenium
